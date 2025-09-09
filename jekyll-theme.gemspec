@@ -12,5 +12,5 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["{_layouts,_includes,assets}/**/*", "LICENSE", "README.md"]
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "jekyll", ">= 4.0"
+  spec.add_dependency "jekyll", "~> 3.9"
 end
