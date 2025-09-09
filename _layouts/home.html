@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<h1>{{ site.title }}</h1>
+
+<ul>
+  <li>Über mich</li>
+  <li>
+    Einträge (<a href="{{ "/feed.xml" | relative_url }}">RSS</a>)
+    <ul>
+      {% for post in site.posts %}
+        <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </li>
+</ul>
