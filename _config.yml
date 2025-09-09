@@ -1,4 +1,4 @@
-permalink: /:year/:month/:day/:title/
+permalink: /:year-:i_month-:i_day-:slug
 markdown: kramdown
 plugins:
   - jekyll-feed
