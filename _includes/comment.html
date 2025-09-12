@@ -1,0 +1,36 @@
+{% assign comments_subfolder = page.url | slugify %}
+{% assign comment_files = site.data.comments[comments_subfolder] %}
+{% assign replies = '' | split: '' %}
+{% for comment_file in comment_files %}
+  {% if comment_file[1].parent_id == include.id %}
+    {% assign replies = replies | push: comment_file[1] %}
+  {% endif %}
+{% endfor %}
+{% assign replies = replies | sort: 'date' %}
+
+<article id="{{include.id}}">
+  <small class="comment-meta">
+    <span>{{ include.name | escape }}, am </span>
+    <time datetime="{{ include.timestamp | date: '%Y-%m-%d' }}">
+      {{ include.timestamp | date: '%d.%m.%Y' }}
+    </time>
+  </small>
+  <button
+    class="comment-respond-button"
+    type="button"
+    onclick="respondTo('{{include.id}}', '{{include.email}}', '{{include.name}}');"
+  >
+    Antworten
+  </button>
+  <div class="comment-text">{{ include.text | escape }}</div>
+
+  {% if replies.size > 0 %}
+    <ul class="replies">
+      {% for reply in replies %}
+        <li>
+          {% include comment.html id=reply.id name=reply.name text=reply.text timestamp=reply.timestamp email=reply.email %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</article>

@@ -1,0 +1,22 @@
+<figure>
+  <div class="media-container">
+    <img
+      src="{{ include.path }}"
+      alt="{{ include.alt | default: '' }}"
+      loading="lazy"
+    >
+    {% if include.link %}
+      <a
+        href="{{ include.link }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Bild in neuem Tab öffnen"
+      >
+        ↗
+      </a>
+    {% endif %}
+  </div>
+  {% if include.caption %}
+    <figcaption>{{ include.caption }}</figcaption>
+  {% endif %}
+</figure>

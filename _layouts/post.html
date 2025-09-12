@@ -1,13 +1,31 @@
 ---
 layout: default
 ---
+<p><a href="{{ "/" | relative_url }}">Startseite</a></p>
 
 <article>
-  <h1>{{ page.title }}</h1>
-  <p><small>{{ page.date | date: "%B %-d, %Y" }}</small></p>
+  <header class="post-header">
+    <div class="post-meta">
+      <p>
+        <small
+          ><time datetime="{{ page.date }}">
+            {{ page.date | date: '%d.%m.%Y' }}
+          </time></small
+        >
+      </p>
+      <p>
+        <small>{% include tags.html tags=page.tags %}</small>
+      </p>
+    </div>
+    <h1>{{ page.title }}</h1>
+  </header>
+
   <div class="post-content">
     {{ content }}
   </div>
 </article>
 
-<p><a href="{{ "/" | relative_url }}">← Back to Home</a></p>
+{% if page.comments == true %}
+  <hr>
+  {% include comments.html %}
+{% endif %}

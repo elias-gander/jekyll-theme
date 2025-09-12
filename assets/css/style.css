@@ -17,11 +17,57 @@ a:hover {
   text-decoration: underline;
 }
 
+hr {
+  border-style: solid;
+  border-color: #999;
+  margin: 3rem 0;
+}
+
+blockquote {
+  border-left: 0.25rem solid #999;
+  border-right: 0.25rem solid transparent;
+  padding: 0 0.5rem;
+  color: #666;
+  font-style: italic;
+}
+
+pre {
+  overflow-x: auto;
+}
+
 h1,
 h2,
 h3 {
   line-height: 1.2;
   margin-top: 1.5rem;
+}
+
+.post-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-meta {
+  color: #666;
+  text-align: right;
+}
+
+.post-meta p {
+  margin: 0;
+}
+
+.post-list li {
+  margin-bottom: 1rem;
+}
+
+.post-list-meta {
+  color: #666;
+}
+
+.tagline {
+  color: #666;
+  font-style: italic;
+  margin-top: -1rem;
 }
 
 ul {
@@ -32,7 +78,85 @@ main {
   display: block;
 }
 
-.post-content img {
+.media-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.media-container a {
+  position: absolute;
+  right: 5px;
+  bottom: 0;
+  font-size: 2rem;
+  text-shadow: 0.1rem 0.1rem 0 #fafafa;
+}
+
+.media-container img,
+.media-container video {
   max-width: 100%;
-  height: auto;
+  max-height: 30rem;
+}
+
+figure,
+figcaption {
+  text-align: center;
+}
+
+audio {
+  width: 100%;
+}
+
+#comments {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.replies {
+  list-style-type: none;
+  padding-left: 1rem;
+  margin-left: 1rem;
+  border-left: medium solid lightgray;
+}
+
+textarea {
+  resize: vertical;
+  display: block;
+  width: 100%;
+  height: 100px;
+}
+
+input,
+textarea,
+button {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+button.g-recaptcha {
+  display: block;
+}
+
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
+#recaptcha-branding,
+label {
+  color: #666;
+}
+
+.comment-meta {
+  color: #666;
+}
+
+.comment-respond-button {
+  float: right;
+}
+
+.comment-text {
+  white-space: pre-line;
+  display: block;
+  margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
 }

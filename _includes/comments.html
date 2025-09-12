@@ -1,0 +1,117 @@
+{% comment %} <section> {% endcomment %}
+{% assign comments_subfolder = page.url | slugify %}
+{% assign comment_files = site.data.comments[comments_subfolder] %}
+{% assign top_level_comments = '' | split: '' %}
+{% for comment_file in comment_files %}
+  {% if comment_file[1].parent_id == null or comment_file[1].parent_id == '' %}
+    {% assign top_level_comments = top_level_comments | push: comment_file[1] %}
+  {% endif %}
+{% endfor %}
+{% assign top_level_comments = top_level_comments | sort: 'date' %}
+
+<h2>Kommentare ({{ comment_files.size | default: 0 }})</h2>
+
+<ul id="comments">
+  {% for comment in top_level_comments %}
+    <li>
+      {%
+        include comment.html
+        id=comment.id name=comment.name text=comment.text timestamp=comment.timestamp
+        email=comment.email
+      %}
+    </li>
+  {% endfor %}
+</ul>
+
+<h3 id="add-comment">Kommentar abgeben</h3>
+
+<form id="comment-form" autocomplete="off">
+  <input type="text" name="name" placeholder="Dein Name" required>
+  <textarea name="text" placeholder="Dein Kommentar" required></textarea>
+  <label for="email"><small>Optional, für Benachrichtigungen bei Antworten</small></label
+  ><br>
+  <input type="email" id="email" name="email" placeholder="Deine Mailadresse">
+  <button
+    class="g-recaptcha"
+    data-sitekey="6Ld501MpAAAAACnG_v6PjIQzJX08Fw5OWb8rmYu2"
+    data-callback="onSubmit"
+  >
+    Absenden
+  </button>
+</form>
+
+<small id="recaptcha-branding">
+  This site is protected by reCAPTCHA and the Google
+  <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+  <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+</small>
+{% comment %} </section> {% endcomment %}
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+  let newCommentParentId = null;
+  let newCommentParentName = null;
+  let newCommentParentEmail = null;
+
+  function respondTo(id, email, name) {
+    cancelResponse();
+    document.getElementById('add-comment').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    newCommentParentId = id;
+    newCommentParentName = name;
+    newCommentParentEmail = email;
+    document.getElementById('add-comment').insertAdjacentHTML(
+      'afterend',
+      `<div id="response-info">
+              als Antwort an ${name} <button onclick="cancelResponse();">&#10005;</button>
+          </div>`
+    );
+  }
+
+  function cancelResponse() {
+    newCommentParentId = null;
+    newCommentParentName = null;
+    newCommentParentEmail = null;
+    document.getElementById('response-info')?.remove();
+  }
+
+  async function onSubmit(token) {
+    const form = document.getElementById('comment-form');
+    if (!form.checkValidity()) {
+      grecaptcha.reset();
+      form.reportValidity();
+      return;
+    }
+
+    const formData = new FormData(form);
+    const payload = {
+      text: formData.get('text'),
+      name: formData.get('name'),
+      email: formData.get('email'),
+      captcha: token,
+      post_comments_foldername: '{{ comments_subfolder }}',
+      post_url: '{{ site.url }}{{ page.url }}',
+      github_page_id: '{{ site.github_username }}',
+      parent_id: newCommentParentId,
+      parent_name: newCommentParentName,
+      parent_email: newCommentParentEmail,
+    };
+
+    try {
+      const res = await fetch('{{ site.backend_url }}/comment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        window.location.href = '/danke';
+      } else {
+        alert('Kommentar konnte nicht gesendet werden');
+        grecaptcha.reset();
+      }
+    } catch (err) {
+      alert('Kommentar konnte nicht gesendet werden');
+      grecaptcha.reset();
+    }
+  }
+</script>

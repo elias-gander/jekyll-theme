@@ -13,4 +13,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "jekyll", "~> 3.9"
+  spec.add_runtime_dependency "jekyll-feed", "~> 0.15"
 end
