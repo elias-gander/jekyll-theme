@@ -86,7 +86,7 @@
       return;
     }
 
-    submitButton.disabled = true;
+    submitButton.style.disabled = 'none';
     submitProgress.style.display = 'inline';
     const formData = new FormData(form);
     const payload = {
@@ -119,8 +119,8 @@
       alert('Kommentar konnte nicht gesendet werden');
       grecaptcha.reset();
     } finally {
-      submitButton.disabled = false;
       submitProgress.style.display = 'none';
+      submitButton.style.display = 'inline';
     }
   }
 </script>
