@@ -18,14 +18,11 @@ a:hover {
 }
 
 hr {
-  border-style: solid;
-  border-color: #999;
   margin: 3rem 0;
 }
 
 blockquote {
-  border-left: 0.25rem solid #999;
-  border-right: 0.25rem solid transparent;
+  border-left: 0.2rem solid #999;
   padding: 0 0.5rem;
   color: #666;
   font-style: italic;
@@ -123,6 +120,7 @@ textarea {
   resize: vertical;
   display: block;
   width: 100%;
+  box-sizing: border-box;
   height: 100px;
 }
 

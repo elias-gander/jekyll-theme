@@ -11,7 +11,9 @@
         <div class="post-list-meta">
           <small>
             <time datetime="{{ post.date }}"> {{ post.date | date: '%d.%m.%Y' }} </time>
-            - {% include tags.html tags=post.tags %}
+            {%- if post.tags.size > 0 -%}
+              - {% include tags.html tags=post.tags %}
+            {%- endif -%}
           </small>
         </div>
       </li>

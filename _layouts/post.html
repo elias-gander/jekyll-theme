@@ -13,9 +13,11 @@ layout: default
           </time></small
         >
       </p>
-      <p>
-        <small>{% include tags.html tags=page.tags %}</small>
-      </p>
+      {% if page.tags.size > 0 %}
+        <p>
+          <small>{% include tags.html tags=page.tags %}</small>
+        </p>
+      {% endif %}
     </div>
     <h1>{{ page.title }}</h1>
   </header>
