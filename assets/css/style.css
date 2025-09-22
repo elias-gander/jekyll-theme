@@ -21,6 +21,17 @@ hr {
   margin: 3rem 0;
 }
 
+table {
+  border-collapse: collapse;
+}
+
+tr,
+th,
+td {
+  border: 1px solid;
+  padding: 0.25rem;
+}
+
 blockquote {
   border-left: 0.2rem solid #999;
   padding: 0 0.5rem;
