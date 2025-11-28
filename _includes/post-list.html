@@ -6,6 +6,8 @@
 {%- if posts.size > 0 -%}
   <ul class="post-list"">
     {%- for post in posts -%}
+    {%- assign comments_subfolder = post.url | slugify -%}
+    {%- assign comment_count = site.data.comments[comments_subfolder] | default: [] | size -%}
       <li>
         <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
         <div class="post-list-meta">
@@ -13,6 +15,14 @@
             <time datetime="{{ post.date }}"> {{ post.date | date: '%d.%m.%Y' }} </time>
             {%- if post.tags.size > 0 -%}
               - {% include tags.html tags=post.tags %}
+            {%- endif -%}
+            {%- if comment_count > 0 -%}
+              - {{ comment_count }} 
+              <span class="comment-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
             {%- endif -%}
           </small>
         </div>

@@ -18,6 +18,18 @@ layout: default
           <small>{% include tags.html tags=page.tags %}</small>
         </p>
       {% endif %}
+      {%- assign comments_subfolder = page.url | slugify -%}
+      {%- assign comment_count = site.data.comments[comments_subfolder] | default: [] | size -%}
+      {%- if comment_count > 0 -%}
+        <p>
+          <small>
+            <a href="#comments">
+              {{- comment_count }} Kommentar
+              {%- if comment_count > 1 -%}e{%- endif -%}
+            </a>
+          </small>
+        </p>
+      {%- endif -%}
     </div>
     <h1>{{ page.title }}</h1>
   </header>

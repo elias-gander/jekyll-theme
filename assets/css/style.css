@@ -73,6 +73,26 @@ h3 {
   color: #666;
 }
 
+.comment-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1em;
+  gap: 0.15em;
+  background-color: #ddd;
+  border-radius: 0.25em;
+  vertical-align: text-bottom;
+}
+
+.comment-icon span {
+  display: block;
+  width: 3px; /* wegen rounding bug bei sehr kleinen em */
+  height: 3px;
+  background-color: #666;
+  border-radius: 50%;
+}
+
 .tagline {
   color: #666;
   font-style: italic;
