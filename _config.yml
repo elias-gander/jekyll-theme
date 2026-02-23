@@ -1,7 +1,4 @@
 permalink: /:year-:i_month-:i_day-:slug
 markdown: kramdown
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
 include:
   - assets
