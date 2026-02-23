@@ -5,10 +5,14 @@ layout: default
 
 {% if site.about_label %}
   <p>
-    <a href="/about">{{ site.about_label }}</a>
+    <a href="/about">
+      {{ site.about_label }}
+    </a>
   </p>
 {% endif %}
 
-<p>Einträge (<a href="/feed.xml" target="_blank">RSS-Feed</a>):</p>
+<p>
+  <a href="/feed.xml" target="_blank">RSS-Feed</a>
+</p>
 
 {% include post-list.html %}

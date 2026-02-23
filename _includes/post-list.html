@@ -4,28 +4,25 @@
   {%- assign posts = site.posts -%}
 {%- endif -%}
 {%- if posts.size > 0 -%}
-  <ul class="post-list"">
+  <ul class="post-list">
     {%- for post in posts -%}
-    {%- assign comments_subfolder = post.url | slugify -%}
-    {%- assign comment_count = site.data.comments[comments_subfolder] | default: [] | size -%}
-      <li>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <div class="post-list-meta">
-          <small>
-            <time datetime="{{ post.date }}"> {{ post.date | date: '%d.%m.%Y' }} </time>
-            {%- if post.tags.size > 0 -%}
-              - {% include tags.html tags=post.tags %}
-            {%- endif -%}
+      {%- assign comments_subfolder = post.url | slugify -%}
+      {%- assign comment_count = site.data.comments[comments_subfolder] | default: [] | size -%}
+      <li style="background-image: url('{{ post.image }}');">
+        <a href="{{ post.url | relative_url }}">
+          <div class="post-list-meta">
+            <h3>{{ post.title }}</h3>
+            <time datetime="{{ post.date }}">{{ post.date | date: '%d.%m.%Y' }}</time>
             {%- if comment_count > 0 -%}
-              - {{ comment_count }} 
-              <span class="comment-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
+              , {{ comment_count }}&nbsp;
+              {%- if comment_count == 1 -%}
+                Kommentar
+              {%- else -%}
+                Kommentare
+              {%- endif -%}
             {%- endif -%}
-          </small>
-        </div>
+          </div>
+        </a>
       </li>
     {%- endfor -%}
   </ul>
