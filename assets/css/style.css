@@ -82,6 +82,13 @@ h3 {
   background-attachment: fixed;
 }
 
+@media (hover: none) {
+  .post-list li {
+    background-attachment: scroll;
+    background-size: cover;
+  }
+}
+
 .post-list li a {
   display: block;
   width: 100%;
