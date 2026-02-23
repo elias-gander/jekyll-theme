@@ -8,7 +8,7 @@
     {%- for post in posts -%}
       {%- assign comments_subfolder = post.url | slugify -%}
       {%- assign comment_count = site.data.comments[comments_subfolder] | default: [] | size -%}
-      <li style="background-image: url('{{ post.image }}');">
+      <li style="background-image: url('{{ post.image | default: "/assets/images/default-post-image.png" }}');">
         <a href="{{ post.url | relative_url }}">
           <div class="post-list-meta">
             <h3>{{ post.title }}</h3>
